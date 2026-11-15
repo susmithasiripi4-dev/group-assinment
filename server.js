@@ -1,3 +1,12 @@
+/*
+================================================
+Project Name : SeedShare Garden
+Student Name : K. NAGASAI 
+Roll Number  : 252U1R3064
+Contribution : Backend Server & REST API Routes (server.js)
+================================================
+*/
+
 const express = require('express');
 const db = require('./database');
 
@@ -155,4 +164,10 @@ if (require.main === module) {
   });
 }
 
+// Health check route
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'OK', uptime: process.uptime() });
+});
+
 module.exports = app;
+
