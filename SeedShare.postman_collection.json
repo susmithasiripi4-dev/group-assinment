@@ -1,0 +1,269 @@
+{
+  "info": {
+    "_postman_id": "seedshare-garden-api-collection",
+    "name": "SeedShare Garden API",
+    "description": "Complete Postman collection for SeedShare Garden API: Plots CRUD, Pagination Twist, Soil Filter, and Leases JOIN endpoint.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. Home & Status",
+      "item": [
+        {
+          "name": "Home Welcome Route (GET /)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": [""]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. Twist Tests (Pagination & Validations)",
+      "item": [
+        {
+          "name": "Twist Test 1: ?page=1&limit=2 (Expect 200, 2 plots)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/plots?page=1&limit=2",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["plots"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "2" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Twist Test 2: ?page=2&limit=2 (Expect 200, next 2 plots)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/plots?page=2&limit=2",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["plots"],
+              "query": [
+                { "key": "page", "value": "2" },
+                { "key": "limit", "value": "2" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Twist Test 3: ?page=0 (Expect 400 Bad Request)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/plots?page=0",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["plots"],
+              "query": [
+                { "key": "page", "value": "0" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Twist Test 4: ?limit=-5 (Expect 400 Bad Request)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/plots?limit=-5",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["plots"],
+              "query": [
+                { "key": "limit", "value": "-5" }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. Search & Filter",
+      "item": [
+        {
+          "name": "Search Plots by Soil (?soil=Loam)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/plots?soil=Loam",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["plots"],
+              "query": [
+                { "key": "soil", "value": "Loam" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Search Plots by Soil (?soil=Clay)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/plots?soil=Clay",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["plots"],
+              "query": [
+                { "key": "soil", "value": "Clay" }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "4. Plots CRUD Endpoints",
+      "item": [
+        {
+          "name": "Get All Plots (Default page=1, limit=5)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/plots",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["plots"]
+            }
+          }
+        },
+        {
+          "name": "Get Single Plot by ID (GET /plots/1)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/plots/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["plots", "1"]
+            }
+          }
+        },
+        {
+          "name": "Create Plot (POST /plots)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Willow Corner\",\n  \"soil\": \"Clay\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/plots",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["plots"]
+            }
+          }
+        },
+        {
+          "name": "Create Plot - Validation Error (Missing soil)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"No Soil Plot\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/plots",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["plots"]
+            }
+          }
+        },
+        {
+          "name": "Update Plot (PUT /plots/1)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"North Patch Renovated\",\n  \"soil\": \"Enriched Loam\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/plots/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["plots", "1"]
+            }
+          }
+        },
+        {
+          "name": "Delete Plot (DELETE /plots/1)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/plots/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["plots", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "5. JOIN Endpoint (Leases)",
+      "item": [
+        {
+          "name": "Get Leases with Gardener & Plot Details (GET /leases)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/leases",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["leases"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
