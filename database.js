@@ -1,3 +1,12 @@
+/*
+================================================
+Project Name : SeedShare Garden
+Student Name : T. Yashwanth
+Roll Number  : 252U1R3092
+Contribution : Database Module (database.js)
+================================================
+*/
+
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 
