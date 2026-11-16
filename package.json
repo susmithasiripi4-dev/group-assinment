@@ -2,13 +2,18 @@
   "name": "seedshare-garden",
   "version": "1.0.0",
   "description": "SeedShare Garden - Backend API with Express and SQLite",
-  "main": "server.js",
+  "main": "backend/server.js",
   "scripts": {
-    "start": "node server.js",
-    "test": "node test_api.js",
-    "dev": "nodemon server.js"
+    "start": "node backend/server.js",
+    "test": "node tests/test_api.js",
+    "dev": "nodemon backend/server.js"
   },
-  "keywords": ["express", "sqlite3", "backend", "seedshare"],
+  "keywords": [
+    "express",
+    "sqlite3",
+    "backend",
+    "seedshare"
+  ],
   "author": "YG-CSEDS2B-G02",
   "license": "ISC",
   "dependencies": {
