@@ -2,7 +2,7 @@
 // Run with: node test_api.js
 
 const http = require('http');
-const app = require('./server');
+const app = require('../backend/server');
 
 const TEST_PORT = 3000;
 
